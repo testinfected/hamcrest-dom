@@ -1,0 +1,72 @@
+group 'com.vtence.hamcrest'
+version '2.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
+apply plugin: 'com.bmuschko.nexus'
+
+repositories {
+    mavenCentral()
+}
+
+def libs = [
+        css_selectors : 'se.fishtank:css-selectors:2.0',
+        hamcrest      : 'org.hamcrest:java-hamcrest:2.0.0.0',
+        junit         : 'junit:junit:4.12@jar',
+        hamcrest_junit: 'org.hamcrest:hamcrest-junit:2.0.0.0',
+]
+
+dependencies {
+    compile libs.hamcrest
+    compile libs.css_selectors
+
+    testCompile libs.junit
+    testCompile libs.hamcrest_junit
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+task 'version' << {
+    println version
+}
+
+modifyPom {
+    project {
+        name 'Hamcrest DOM Matchers'
+        description 'Hamcrest matchers library for DOM assertions'
+        url 'https://github.com/testinfected/hamcrest-dom'
+        packaging 'jar'
+        licenses {
+            license {
+                name 'BSD License'
+                url 'https://opensource.org/licenses/BSD-3-Clause'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url 'https://github.com/testinfected/hamcrest-dom'
+            connection 'scm:git:https://github.com/testinfected/hamcrest-dom.git'
+            developerConnection 'https://github.com/testinfected/hamcrest-dom.git'
+        }
+        developers {
+            developer {
+                id 'testinfected'
+                name 'Vincent Tencé'
+            }
+        }
+
+        // no need to publish test dependencies
+        dependencies.removeAll { it.scope == "test" }
+    }
+}
+
