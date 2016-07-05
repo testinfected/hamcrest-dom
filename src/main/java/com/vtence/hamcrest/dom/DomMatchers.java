@@ -102,7 +102,7 @@ public class DomMatchers {
      * @see DomMatchers#contains(java.util.List)
      * @param elementsMatchers the matchers to match the collection of {@link org.w3c.dom.Element}s
      */
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static Matcher<Iterable<Element>> contains(Matcher<? super Element>... elementsMatchers) {
         return contains(Arrays.asList(elementsMatchers));
     }
@@ -143,7 +143,7 @@ public class DomMatchers {
      * @param elementsMatchers the matchers to match the collection of {@link org.w3c.dom.Element}s
      */
 
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static Matcher<Iterable<Element>> containsInAnyOrder(Matcher<? super Element>... elementsMatchers) {
         return containsInAnyOrder(Arrays.asList(elementsMatchers));
     }
@@ -176,6 +176,7 @@ public class DomMatchers {
      *
      * @param elementsMatchers matchers to match {@link org.w3c.dom.Element}s in the collection
      */
+    @SafeVarargs
     public static Matcher<Iterable<Element>> includes(Matcher<? super Element>... elementsMatchers) {
         return Matchers.hasItems(elementsMatchers);
     }
