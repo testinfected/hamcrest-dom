@@ -4,6 +4,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.hamcrest.collection.IsIterableContainingInOrder;
+import org.hamcrest.core.Every;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;
@@ -179,6 +180,17 @@ public class DomMatchers {
     @SafeVarargs
     public static Matcher<Iterable<Element>> includes(Matcher<? super Element>... elementsMatchers) {
         return Matchers.hasItems(elementsMatchers);
+    }
+
+    /**
+     * Checks that every element in a given collection of {@link org.w3c.dom.Element}s matches the
+     * specified matcher.
+     *
+     * @param elementMatcher matcher to match every {@link org.w3c.dom.Element}s in the collection
+     */
+    @SuppressWarnings("unchecked")
+    public  static Matcher<Iterable<Element>> everyElement(Matcher<? super Element> elementMatcher) {
+        return new Every(elementMatcher);
     }
 
     /**
