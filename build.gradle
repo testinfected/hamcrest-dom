@@ -1,5 +1,5 @@
 group 'com.vtence.hamcrest'
-version '2.0.0'
+version '2.1-rc3'
 
 apply plugin: 'java'
 sourceCompatibility = 1.8
@@ -21,9 +21,8 @@ repositories {
 
 def libs = [
         css_selectors : 'se.fishtank:css-selectors:2.0',
-        hamcrest      : 'org.hamcrest:java-hamcrest:2.0.0.0',
-        junit         : 'junit:junit:4.12@jar',
-        hamcrest_junit: 'org.hamcrest:hamcrest-junit:2.0.0.0',
+        hamcrest      : 'org.hamcrest:hamcrest:2.1-rc3',
+        junit         : 'junit:junit:4.12@jar'
 ]
 
 dependencies {
@@ -31,7 +30,6 @@ dependencies {
     compile libs.css_selectors
 
     testCompile libs.junit
-    testCompile libs.hamcrest_junit
 }
 
 compileJava.options.encoding = 'UTF-8'
